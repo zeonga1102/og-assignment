@@ -1,17 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block statics %}
-    {% comment %} <script src="{% static 'js/index.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 {% block content %}
     <div>
     {% if user.is_authenticated %}
         <p>{{user}}님 안녕하세요!</p>
-        <a onclick='logoutButton()'>로그아웃</a>
+        <button onclick='logoutButton()'>로그아웃</button>
     {% else %}
         <p><a href={% url "signup" %}>회원가입</a></p>
-        <p><a href={% url "login_out" %}>로그인</a></p>
+        <p><a href={% url "login" %}>로그인</a></p>
     {% endif %}
     </div>
     <a href='#'>작가 조회</a>
