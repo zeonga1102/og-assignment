@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block statics %}
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div>
+            <a href='#'>메인으로</a>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">이름</th>
+                    <th scope="col">100호 이하 작품 수</th>
+                    <th scope="col">평균 가격</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for artist in artists%}
+                        <tr>
+                            <td>{{ artist.name }}</td>
+                            <td>{{ artist.number_of_under_100 }}</td>
+                            <td>{{ artist.avg_price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+{% endblock %}

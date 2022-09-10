@@ -1,0 +1,27 @@
+{% extends 'artist_base.html' %}
+
+{% block statics %}
+{% endblock %}
+
+{% block artist_content %}
+    <div>
+        <h1>전시 등록</h1>
+        <form>
+            <p>제목 <input type="text"></p>
+            <p>시작일 <input type="text"></p>
+            <p>종료일 <input type="text"></p>
+            {% for work in works %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ work.title }}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ work.size }}호</li>
+                        <li class="list-group-item">{{ work.price }}원</li>
+                        <label><input type="checkbox" name="work" value={{ work.id }}> 선택</label>
+                    </ul>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}

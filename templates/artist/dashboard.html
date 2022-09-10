@@ -1,0 +1,45 @@
+{% extends 'artist_base.html' %}
+
+{% block statics %}
+{% endblock %}
+
+{% block artist_content %}
+    <div>
+        <div>
+            <h3>{{ name }}</h3>
+            <p>{{ gender }}</p>
+            <p>{{ birthday }}</p>
+        </div>
+        <div>
+            <a href='#'>{{ email }}</a>
+            <a href='#'>{{ phone }}</a>
+        </div>
+        <div>
+            <div>
+                <h5>작품</h5>
+                {% for work in works %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ work.title }}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ work.size }}호</li>
+                            <li class="list-group-item">{{ work.price }}원</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <h5>전시</h5>
+                {% for exhibition in exhibition_list %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ exhibition.title }}</h5>
+                            <p class="card-text">{{ exhibition.start_date }} ~ {{ exhibition.end_date }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

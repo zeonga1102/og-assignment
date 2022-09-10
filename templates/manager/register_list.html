@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block statics %}
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div>
+            <a href='#'>메인으로</a>
+            <input type="text">
+            <button>승인</button>
+            <button>반려</button>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">이름</th>
+                    <th scope="col">성별</th>
+                    <th scope="col">생년월일</th>
+                    <th scope="col">이메일</th>
+                    <th scope="col">연락처</th>
+                    <th scope="col">신청일</th>
+                    <th scope="col">상태</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for artist in artists%}
+                        <tr>
+                            <td>{{ artist.name }}</td>
+                            <td>{{ artist.gender }}</td>
+                            <td>{{ artist.birthday }}</td>
+                            <td>{{ artist.email }}</td>
+                            <td>{{ artist.phone }}</td>
+                            <td>{{ artist.signup_date }}</td>
+                            <td>{{ artist.status }}</td>
+                            <td><input type="checkbox" name="artist" value={{ artist.id }}></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+{% endblock %}

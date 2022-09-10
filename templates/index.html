@@ -1,0 +1,30 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>DRF</title>
+
+    {% comment %} <script src="{% static 'js/index.js' %}"></script> {% endcomment %}
+</head>
+
+<body>
+    <div>
+    {% if user.is_authenticated %}
+        <p>{{user}}님 안녕하세요!</p>
+        <a onclick='logoutButton()'>로그아웃</a>
+        <p><a href={% url 'user_info' %}>유저 정보</a></p>
+    {% else %}
+        <p><a href={% url 'signup' %}>회원가입</a></p>
+        <p><a href={% url 'login' %}>로그인</a></p>
+    {% endif %}
+    </div>
+    <a href='#'>작가 조회</a>
+    <a href='#'>작품 조회</a>
+</body>
+
+</html>
