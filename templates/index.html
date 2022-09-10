@@ -1,18 +1,10 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <title>DRF</title>
-
+{% block statics %}
     {% comment %} <script src="{% static 'js/index.js' %}"></script> {% endcomment %}
-</head>
+{% endblock %}
 
-<body>
+{% block content %}
     <div>
     {% if user.is_authenticated %}
         <p>{{user}}님 안녕하세요!</p>
@@ -24,6 +16,4 @@
     </div>
     <a href='#'>작가 조회</a>
     <a href='#'>작품 조회</a>
-</body>
-
-</html>
+{% endblock %}
