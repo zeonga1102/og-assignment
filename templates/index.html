@@ -17,10 +17,9 @@
     {% if user.is_authenticated %}
         <p>{{user}}님 안녕하세요!</p>
         <a onclick='logoutButton()'>로그아웃</a>
-        <p><a href={% url 'user_info' %}>유저 정보</a></p>
     {% else %}
-        <p><a href={% url 'signup' %}>회원가입</a></p>
-        <p><a href={% url 'login' %}>로그인</a></p>
+        <p><a href={% url "signup" %}>회원가입</a></p>
+        <p><a href={% url "login_out" %}>로그인</a></p>
     {% endif %}
     </div>
     <a href='#'>작가 조회</a>
