@@ -18,7 +18,7 @@ class UserView(APIView):
     template_name = "sign_up.html"
 
     def get(self, request):
-        return Response({"message": "정상"}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
     
     def post(self, request):
         user_serializer = UserSerializer(data=request.data)
@@ -35,7 +35,7 @@ class UserApiView(APIView):
     template_name = "sign_in.html"
 
     def get(self, request):
-        return Response({"message": "정상"}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
 
     def post(self, request):
         username = request.data.get("username", "")
@@ -50,7 +50,7 @@ class UserApiView(APIView):
 
     def delete(self, request):
         logout(request)
-        return Response({"message": "정상"}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
 
 
 class IndexView(APIView):
