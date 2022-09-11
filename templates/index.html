@@ -22,6 +22,6 @@
     {% elif user_type == "waiting" %}
         <a>대기 중</a>
     {% else %}
-        <a href="#">작가 등록</a>
+        <a href={% url "new_artist" %}>작가 등록</a>
     {% endif %}
 {% endblock %}
