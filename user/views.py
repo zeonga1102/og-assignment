@@ -20,7 +20,6 @@ class UserView(APIView):
     def get(self, request):
         return Response({"message": "정상"}, status=status.HTTP_200_OK)
     
-    # 회원가입
     def post(self, request):
         user_serializer = UserSerializer(data=request.data)
 
@@ -29,12 +28,6 @@ class UserView(APIView):
             return redirect("login")
             
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def put(self, request):
-        return Response({"message": "put method"})
-    
-    def delete(self, request):
-        return Response({"message": "delete method"})
 
 
 class UserApiView(APIView):
@@ -44,7 +37,6 @@ class UserApiView(APIView):
     def get(self, request):
         return Response({"message": "정상"}, status=status.HTTP_200_OK)
 
-    # 로그인
     def post(self, request):
         username = request.data.get("username", "")
         password = request.data.get("password", "")
@@ -56,7 +48,6 @@ class UserApiView(APIView):
         login(request, user)
         return redirect("index")
 
-    # 로그아웃
     def delete(self, request):
         logout(request)
         return Response({"message": "정상"}, status=status.HTTP_200_OK)
