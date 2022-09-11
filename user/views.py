@@ -76,7 +76,7 @@ class InfoView(APIView):
 
     def get(self, request, type):
         if type == "artist":
-            artist_data = Artist.objects.all()
+            artist_data = Artist.objects.filter(status__status="승인")
             serialized_artist_data = ArtistSerializer(artist_data, many=True).data
             return Response({"type": "artist", "artists": serialized_artist_data}, status=status.HTTP_200_OK)
         elif type == "work":
