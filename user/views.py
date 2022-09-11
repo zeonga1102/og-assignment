@@ -67,7 +67,23 @@ class IndexView(APIView):
     template_name = "index.html"
 
     def get(self, request):
-        return Response({"message": "정상"}, status=status.HTTP_200_OK)
+        user = request.user
+
+        if user.is_authenticated:
+            if user.is_admin:
+                return Response({"user_type": "admin"}, status=status.HTTP_200_OK)
+
+            is_artist = Artist.objects.filter(user=user.id).first()
+            if is_artist:
+                artist_status = is_artist.status.status
+                if artist_status == "승인":
+                    return Response({"user_type": "artist"}, status=status.HTTP_200_OK)
+                elif artist_status == "대기":
+                    return Response({"user_type": "waiting"}, status=status.HTTP_200_OK)
+                else:
+                    return Response({"user_type": "user"}, status=status.HTTP_200_OK)
+            
+        return Response({"user_type": "user"}, status=status.HTTP_200_OK)
 
 
 class InfoView(APIView):
