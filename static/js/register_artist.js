@@ -62,7 +62,7 @@ function checkForm() {
         phone.focus()
         return false
     }
-    const phoneRe = /^010-([0-9]{4})-([0-9]{4})$/
+    const phoneRe = /^010-\d{4}-\d{4}$/
     if(!phoneRe.test(phone.value)) {
         showAlertAndFocusing(phone)
         return false
