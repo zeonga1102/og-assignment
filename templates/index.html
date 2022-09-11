@@ -1,20 +1,18 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block statics %}
-    <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 {% block content %}
     <div>
     {% if user.is_authenticated %}
         <p>{{user}}님 안녕하세요!</p>
-        <button onclick='logoutButton()'>로그아웃</button>
+        <button onclick="logoutButton()">로그아웃</button>
     {% else %}
         <p><a href={% url "signup" %}>회원가입</a></p>
         <p><a href={% url "login" %}>로그인</a></p>
     {% endif %}
     </div>
-    <a href='#'>작가 조회</a>
-    <a href='#'>작품 조회</a>
+    <a href={% url "info" "artist" %}>작가 조회</a>
+    <a href={% url "info" "work" %}>작품 조회</a>
 {% endblock %}
