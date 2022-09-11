@@ -27,7 +27,7 @@ class UserView(APIView):
             user_serializer.save()
             return redirect("login")
             
-        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserApiView(APIView):
