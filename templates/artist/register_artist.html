@@ -3,6 +3,13 @@
 
 {% block statics %}
   <script src="{% static "js/register_artist.js" %}"></script>
+  
+  {% if user.is_anonymous %}
+  <script>
+    alert("로그인 후 이용 가능합니다!")
+    window.location.href = "/login"
+  </script>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -36,5 +43,6 @@
         <button type="button" class="btn btn-primary" id="submitBtn">Sign in</button>
       </div>
   </form>
+  <a href={% url "index" %}>메인으로</a>
 </div>
 {% endblock %}
