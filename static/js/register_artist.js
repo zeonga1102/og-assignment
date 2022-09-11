@@ -1,32 +1,21 @@
 function showAlertAndFocusing(elem) {
     alert("형식에 맞게 입력해주세요!")
     elem.focus()
+    return false
 }
 
 
 function checkForm() {
     const name = document.getElementById("name")
-    if(!name.value) {
-        alert("이름을 입력해주세요!")
-        name.focus()
-        return false
-    }
-    if(name.value.length > 16) {
-        alert("이름은 16글자 이하로 입력해주세요!")
-        name.focus()
-        return false
+    const nameRe = /.{1,16}$/
+    if(!nameRe.test(name.value)) {
+        return showAlertAndFocusing(name)
     }
 
     const birthday = document.getElementById("birthday")
-    if(!birthday.value) {
-        alert("생년월일을 입력해주세요!")
-        birthday.focus()
-        return false
-    }
     const birthdayRe = /^[1|2]\d{3}-\d{2}-\d{2}$/
     if(!birthdayRe.test(birthday.value)) {
-        showAlertAndFocusing(birthday)
-        return false
+        return showAlertAndFocusing(birthday)
     }
     const birthdaySplit = birthday.value.split("-")
     const month = parseInt(birthdaySplit[1])
@@ -45,28 +34,17 @@ function checkForm() {
     }
 
     const email = document.getElementById("email")
-    if(!email.value) {
-        alert("이메일을 입력해주세요!")
-        email.focus()
-        return false
-    }
     const emailRe = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
     if(!emailRe.test(email.value)) {
-        showAlertAndFocusing(email)
-        return false
+        return showAlertAndFocusing(email)
     }
 
     const phone = document.getElementById("phone")
-    if(!phone.value) {
-        alert("연락처를 입력해주세요!")
-        phone.focus()
-        return false
-    }
     const phoneRe = /^010-\d{4}-\d{4}$/
     if(!phoneRe.test(phone.value)) {
-        showAlertAndFocusing(phone)
-        return false
+        return showAlertAndFocusing(phone)
     }
+
     return true
 }
 
