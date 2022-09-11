@@ -2,6 +2,12 @@ from django.db import models
 
 
 class Status(models.Model):
+    """
+    작가 등록 신청 상태에 대한 테이블입니다.
+    id 1: 승인
+    id 2: 대기
+    id 3: 반려
+    """
     status = models.CharField(max_length=5)
 
 

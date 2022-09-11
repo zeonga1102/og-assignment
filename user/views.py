@@ -21,6 +21,10 @@ class UserView(APIView):
         return Response(status=status.HTTP_200_OK)
     
     def post(self, request):
+        """
+        회원가입을 진행합니다.
+        회원가입이 완료되면 로그인 페이지로 이동합니다.
+        """
         user_serializer = UserSerializer(data=request.data)
 
         if user_serializer.is_valid():
@@ -38,6 +42,10 @@ class UserApiView(APIView):
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        로그인을 진행합니다.
+        사용자 인증이 올바르게 완료되면 인덱스 페이지로 이동합니다.
+        """
         username = request.data.get("username", "")
         password = request.data.get("password", "")
 
@@ -49,6 +57,9 @@ class UserApiView(APIView):
         return redirect("index")
 
     def delete(self, request):
+        """
+        로그아웃을 합니다.
+        """
         logout(request)
         return Response(status=status.HTTP_200_OK)
 
@@ -58,6 +69,11 @@ class IndexView(APIView):
     template_name = "index.html"
 
     def get(self, request):
+        """
+        인덱스 페이지를 보여줍니다.
+        현재 유저가 인증된 사용자인지 아닌지 먼저 구분합니다.
+        만약 인증된 사용자라면 관리자 계정인지, 작가 계정이라면 현재 등록 신청 상태는 어떠한지 또한 구분합니다.
+        """
         user = request.user
 
         if user.is_authenticated:
@@ -82,6 +98,10 @@ class InfoView(APIView):
     template_name = "info.html"
 
     def get(self, request, type):
+        """
+        작가 혹은 작품 정보를 보여줍니다.
+        작가 정보는 승인된 작가만 보여집니다.
+        """
         if type == "artist":
             artist_data = Artist.objects.filter(status__status="승인")
             serialized_artist_data = ArtistSerializer(artist_data, many=True).data

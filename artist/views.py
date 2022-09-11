@@ -14,6 +14,10 @@ class RegisterArtistView(APIView):
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        작가 등록 신청을 합니다.
+        신청이 정상적으로 완료되면 인덱스 페이지로 이동합니다.
+        """
         data = request.data.copy()
 
         data["user"] = request.user.id
