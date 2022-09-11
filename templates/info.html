@@ -5,31 +5,31 @@
 
 {% block content %}
 <div>
-    <input type='text'>
+    <input type="text">
     <div>
-        <a href="#">작가 조회</a>
-        <a href="#">작품 조회</a>
+        <a href={% url "info" "artist" %}>작가 조회</a>
+        <a href={% url "info" "work" %}>작품 조회</a>
         {% if user.is_authenticated %}
-            <a href="#">로그아웃</a>
+            <button onclick="logoutButton()">로그아웃</button>
         {% else %}
-            <a href="#">로그인</a>
+            <a href={% url "login" %}>로그인</a>
         {% endif %}
     </div>
 </div>
-    {% if type == 'artist' %}
+<div>
+    {% if type == "artist" %}
         {% for artist in artists %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ artist.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ artist.gender }}, {{ artist.birthday }}</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a href="mailto:{{ artist.email }}" class="card-link">{{ artist.email }}</a>
+                    <a href="tel:{{ artist.phone }}" class="card-link">{{ artist.phone }}</a>
                 </div>
             </div>
         {% endfor %}
 
-    {% else %}
+    {% elif type == "work" %}
           {% for work in works %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -42,7 +42,5 @@
             </div>
           {% endfor %}
     {% endif%}
-<div>
-    
 </div>
 {% endblock %}
