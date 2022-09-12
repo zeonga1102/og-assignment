@@ -77,3 +77,13 @@ class RegisterWorkView(APIView):
             return Response(status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class RegisterExhibitionView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "artist/register_exhibition.html"
+
+    def get(self, request):
+        work_data = Work.objects.filter(artist__user=request.user)
+        serialized_work_data = WorkSerializer(work_data, many=True).data
+        return Response({"works": serialized_work_data}, status=status.HTTP_200_OK)

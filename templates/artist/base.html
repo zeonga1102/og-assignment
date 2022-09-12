@@ -6,7 +6,7 @@
 {% block content %}
     <div>
         <a href={% url "artist:work" %}>작품 등록</a>
-        <a href='#'>전시 등록</a>
+        <a href={% url "artist:exhibition" %}>전시 등록</a>
         <a href={% url "index" %}>메인으로</a>
         <button onclick="logout()">로그아웃</button>
     </div>

@@ -1,4 +1,4 @@
-{% extends "artist_base.html" %}
+{% extends "artist/base.html" %}
 
 {% block statics %}
 {% endblock %}
@@ -10,18 +10,26 @@
             <p>제목 <input type="text"></p>
             <p>시작일 <input type="text"></p>
             <p>종료일 <input type="text"></p>
-            {% for work in works %}
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ work.title }}</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ work.size }}호</li>
-                        <li class="list-group-item">{{ work.price }}원</li>
-                        <label><input type="checkbox" name="work" value={{ work.id }}> 선택</label>
-                    </ul>
-                </div>
-            {% endfor %}
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">제목</th>
+                        <th scope="col">호수</th>
+                        <th scope="col">선택</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for work in works %}
+                            <tr>
+                                <td>{{ work.title }}</td>
+                                <td>{{ work.size }}</td>
+                                <td><input type="checkbox" name="work" value={{ work.id }}></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </form>
     </div>
 {% endblock %}
