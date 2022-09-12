@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.utils import dateformat
 
 import re
 
@@ -8,6 +9,14 @@ from .models import Exhibition
 
 
 class ArtistSerializer(serializers.ModelSerializer):
+    status_status = serializers.SerializerMethodField(read_only=True)
+    signup_date = serializers.SerializerMethodField()
+
+    def get_status_status(self, obj):
+        return obj.status.status
+
+    def get_signup_date(self, obj):
+        return dateformat.format(obj.signup_date, 'y.m.d H:i:s')
 
     def validate(self, data):
         phone_re = re.compile("^010-\d{4}-\d{4}$")
@@ -25,7 +34,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ["user", "name", "gender", "birthday", "email", "phone", "signup_date", "status"]
+        fields = ["id", "user", "name", "gender", "birthday", "email", "phone", "signup_date", "status", "status_status"]
 
 
 class WorkSerializer(serializers.ModelSerializer):
