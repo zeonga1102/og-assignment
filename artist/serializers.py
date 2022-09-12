@@ -44,6 +44,20 @@ class WorkSerializer(serializers.ModelSerializer):
 
 
 class ExhibitionSerializer(serializers.ModelSerializer):
+
+    def validate(self, data):
+        if len(data.get("work")) < 1:
+            raise serializers.ValidationError(
+                detail = {"error": "작품을 하나 이상 선택해주세요!"},
+            )
+
+        if data.get("start_date") > data.get("end_date"):
+            raise serializers.ValidationError(
+                detail = {"error": "종료일은 시작일보다 빠를 수 없습니다!"},
+            )
+
+        return data
+
     class Meta:
         model = Exhibition
         fields = ["artist", "title", "start_date", "end_date", "work"]
