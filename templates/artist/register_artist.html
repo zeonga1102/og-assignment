@@ -16,7 +16,8 @@
 
 {% block content %}
 <div>
-  <form id="newArtistForm" method="post" action={% url "new_artist" %} class="row g-3">
+  <a href={% url "index" %}>메인으로</a>
+  <form id="newArtistForm" method="post" action={% url "artist:signup" %} class="row g-3">
       {% csrf_token %}
       <div class="col-md-4">
         <label for="name" class="form-label">이름</label>
@@ -45,6 +46,5 @@
         <button type="button" class="btn btn-primary" id="submitBtn">Sign in</button>
       </div>
   </form>
-  <a href={% url "index" %}>메인으로</a>
 </div>
 {% endblock %}
