@@ -18,7 +18,7 @@
                     {% for artist in artists %}
                         <tr>
                             <td>{{ artist.name }}</td>
-                            <td>{{ artist.number_of_under_100 }}</td>
+                            <td>{{ artist.number_of_lte_100 }}</td>
                             <td>{{ artist.avg_price }}</td>
                         </tr>
                     {% endfor %}
