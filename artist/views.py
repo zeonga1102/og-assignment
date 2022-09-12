@@ -87,3 +87,14 @@ class RegisterExhibitionView(APIView):
         work_data = Work.objects.filter(artist__user=request.user)
         serialized_work_data = WorkSerializer(work_data, many=True).data
         return Response({"works": serialized_work_data}, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        data = request.data.copy()
+
+        data["artist"] = Artist.objects.get(user=request.user).id
+        exhibition_serializer = ExhibitionSerializer(data=data)
+        if exhibition_serializer.is_valid():
+            exhibition_serializer.save()
+            return redirect("artist:exhibition")
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
