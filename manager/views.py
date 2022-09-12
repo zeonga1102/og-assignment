@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework import status
 
+from artist.models import Artist
+
+from artist.serializers import ArtistSerializer
+
 
 class DashboardView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -11,3 +15,11 @@ class DashboardView(APIView):
 
     def get(self, request):
         return Response({"is_dashboard": True}, status=status.HTTP_200_OK)
+
+
+class RegisterListView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "manager/register_list.html"
+
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)
