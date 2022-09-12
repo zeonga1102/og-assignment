@@ -16,7 +16,7 @@
     <a href={% url "info" "artist" %}>작가 조회</a>
     <a href={% url "info" "work" %}>작품 조회</a>
     {% if user_type == "admin" %}
-        <a href="#">관리자 페이지</a>
+        <a href={% url "manager:dashboard" %}>관리자 페이지</a>
     {% elif user_type == "artist" %}
         <a href={% url "artist:dashboard" %}>작가 페이지</a>
     {% elif user_type == "waiting" %}
