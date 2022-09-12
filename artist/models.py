@@ -27,3 +27,11 @@ class Work(models.Model):
     title = models.CharField(max_length=64)
     price = models.IntegerField()
     size = models.IntegerField()
+
+
+class Exhibition(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    title = models.CharField(max_length=64)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    work = models.ManyToManyField(Work)
