@@ -29,3 +29,11 @@ class RegisterArtistView(APIView):
             return redirect("index")
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class DashboardView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "artist/dashboard.html"
+
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)

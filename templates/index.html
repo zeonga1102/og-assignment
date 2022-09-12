@@ -18,10 +18,10 @@
     {% if user_type == "admin" %}
         <a href="#">관리자 페이지</a>
     {% elif user_type == "artist" %}
-        <a href="#">작가 페이지</a>
+        <a href={% url "artist:dashboard" %}>작가 페이지</a>
     {% elif user_type == "waiting" %}
         <a>대기 중</a>
     {% else %}
-        <a href={% url "new_artist" %}>작가 등록</a>
+        <a href={% url "artist:signup" %}>작가 등록</a>
     {% endif %}
 {% endblock %}
