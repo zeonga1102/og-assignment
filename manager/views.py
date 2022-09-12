@@ -22,4 +22,6 @@ class RegisterListView(APIView):
     template_name = "manager/register_list.html"
 
     def get(self, request):
-        return Response(status=status.HTTP_200_OK)
+        artist_data = Artist.objects.all()
+        serialized_artist_data = ArtistSerializer(artist_data, many=True).data
+        return Response({"artists": serialized_artist_data}, status=status.HTTP_200_OK)
