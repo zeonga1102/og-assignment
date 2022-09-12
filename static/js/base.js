@@ -26,3 +26,10 @@ async function logout() {
     else
         alert(response.status)
 }
+
+
+function showAlertAndFocusing(elem) {
+  alert("형식에 맞게 입력해주세요!")
+  elem.focus()
+  return false
+}
