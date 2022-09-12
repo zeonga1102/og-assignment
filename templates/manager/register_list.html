@@ -21,7 +21,7 @@
                     <th scope="col">연락처</th>
                     <th scope="col">신청일</th>
                     <th scope="col">상태</th>
-                    <th scope="col"></th>
+                    <th scope="col">선택</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -33,8 +33,12 @@
                             <td>{{ artist.email }}</td>
                             <td>{{ artist.phone }}</td>
                             <td>{{ artist.signup_date }}</td>
-                            <td>{{ artist.status }}</td>
-                            <td><input type="checkbox" name="artist" value={{ artist.id }}></td>
+                            <td>{{ artist.status_status }}</td>
+                            <td>
+                                {% if artist.status == 2 %}
+                                    <input type="checkbox" name="artist" value={{ artist.id }}>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
