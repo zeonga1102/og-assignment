@@ -5,6 +5,7 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework import status
 
 from artist.models import Artist
+from artist.models import Status
 
 from artist.serializers import ArtistSerializer
 
@@ -25,3 +26,17 @@ class RegisterListView(APIView):
         artist_data = Artist.objects.all()
         serialized_artist_data = ArtistSerializer(artist_data, many=True).data
         return Response({"artists": serialized_artist_data}, status=status.HTTP_200_OK)
+
+    def put(self, request, new_status):
+        artist_data = Artist.objects.filter(id__in=request.data.get("selectedArtists", None))
+
+        try:
+            new_status_data = Status.objects.get(id=new_status)
+        except Status.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        for ad in artist_data:
+            ad.status = new_status_data
+            ad.save()
+            
+        return Response(status=status.HTTP_200_OK)
