@@ -42,6 +42,12 @@ class DashboardView(APIView):
     template_name = "artist/dashboard.html"
 
     def get(self, request):
+        """
+        작가 페이지의 대시보드를 보여줍니다.
+        작가 정보, 작품 정보, 전시 정보를 전송합니다.
+        is_dashboard는 현재 보고있는 페이지가 대시보드라고 나타내는 플래그 용도로,
+        현재 페이지에서 대시보드로 이동하는 링크를 생성하지 않기 위해 전송합니다.
+        """
         artist = Artist.objects.get(user=request.user)
         serialized_artist_data = ArtistSerializer(artist).data
 
@@ -67,6 +73,9 @@ class RegisterWorkView(APIView):
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        작품을 등록합니다.
+        """
         data = request.data.copy()
 
         data["artist"] = Artist.objects.get(user=request.user).id
@@ -90,6 +99,9 @@ class RegisterExhibitionView(APIView):
         return Response({"works": serialized_work_data}, status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        전시를 등록합니다.
+        """
         data = request.data.copy()
 
         data["artist"] = Artist.objects.get(user=request.user).id
