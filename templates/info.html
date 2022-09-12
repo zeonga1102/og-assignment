@@ -10,7 +10,7 @@
         <a href={% url "info" "artist" %}>작가 조회</a>
         <a href={% url "info" "work" %}>작품 조회</a>
         {% if user.is_authenticated %}
-            <button onclick="logoutButton()">로그아웃</button>
+            <button onclick="logout()">로그아웃</button>
         {% else %}
             <a href={% url "login" %}>로그인</a>
         {% endif %}

@@ -14,7 +14,7 @@ function getCookie(name) {
   }
 
 
-async function logoutButton() {
+async function logout() {
     csrftoken = getCookie('csrftoken')
     const response = await fetch ('/login', {
         headers: { "X-CSRFToken": csrftoken },

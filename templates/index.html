@@ -7,7 +7,7 @@
     <div>
     {% if user.is_authenticated %}
         <p>{{user}}님 안녕하세요!</p>
-        <button onclick="logoutButton()">로그아웃</button>
+        <button onclick="logout()">로그아웃</button>
     {% else %}
         <p><a href={% url "signup" %}>회원가입</a></p>
         <p><a href={% url "login" %}>로그인</a></p>
