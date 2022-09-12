@@ -84,7 +84,7 @@ class RegisterWorkView(APIView):
         work_serializer = WorkSerializer(data=data)
         if work_serializer.is_valid():
             work_serializer.save()
-            return Response(status=status.HTTP_200_OK)
+            return redirect("artist:work")
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
