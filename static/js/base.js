@@ -1,28 +1,28 @@
 function getCookie(name) {
     if (!document.cookie) {
-      return null;
+      return null
     }
   
-    const xsrfCookies = document.cookie.split(';')
+    const xsrfCookies = document.cookie.split(";")
       .map(c => c.trim())
-      .filter(c => c.startsWith(name + '='));
+      .filter(c => c.startsWith(name + "="))
   
     if (xsrfCookies.length === 0) {
-      return null;
+      return null
     }
-    return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+    return decodeURIComponent(xsrfCookies[0].split("=")[1])
   }
 
 
 async function logout() {
-    csrftoken = getCookie('csrftoken')
-    const response = await fetch ('/login', {
+    csrftoken = getCookie("csrftoken")
+    const response = await fetch ("/login", {
         headers: { "X-CSRFToken": csrftoken },
-        method: 'DELETE'
+        method: "DELETE"
     })
 
     if(response.status == 200)
-        window.location.replace('/')
+        window.location.replace("/")
     else
         alert(response.status)
 }
