@@ -66,4 +66,14 @@ class RegisterWorkView(APIView):
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request):
-        return Response(status=status.HTTP_200_OK)
+        data = request.data.copy()
+
+        data["artist"] = Artist.objects.get(user=request.user).id
+        data["price"] = data.get("price", "").replace(",", "")
+
+        work_serializer = WorkSerializer(data=data)
+        if work_serializer.is_valid():
+            work_serializer.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
