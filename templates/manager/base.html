@@ -8,7 +8,7 @@
         {% if not is_dashboard %}
             <a href={% url "manager:register_list" %}>작가 등록 신청 내역</a>
             <a href="#">작가 통계</a>
-            <a href="#">대시보드로</a>
+            <a href={% url "manager:dashboard" %}>대시보드로</a>
         {% endif %}
         <a href={% url "index" %}>메인으로</a>
         <button onclick="logout()">로그아웃</button>
