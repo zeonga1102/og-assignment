@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.db.models import Avg, Count
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -47,4 +48,11 @@ class StatisticsView(APIView):
     template_name = "manager/statistics.html"
 
     def get(self, request):
-        return Response(status=status.HTTP_200_OK)
+        artist_data = Artist.objects.prefetch_related("work_set")
+        for ad in artist_data:
+            setattr(ad, "number_of_lte_100", ad.work_set.filter(size__lte=100).aggregate(number_of_lte_100=Count("size"))["number_of_lte_100"])
+            avg_price = ad.work_set.all().aggregate(avg_price=Avg("price"))["avg_price"]
+            if avg_price is None:
+                avg_price = 0
+            setattr(ad, "avg_price", avg_price)
+        return Response({"artists": artist_data}, status=status.HTTP_200_OK)
