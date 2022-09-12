@@ -12,6 +12,11 @@ from artist.serializers import ArtistSerializer
 
 
 class DashboardView(APIView):
+    """
+    관리자 페이지의 대시보드를 보여줍니다.
+    is_dashboard는 현재 보고있는 페이지가 대시보드라고 나타내는 플래그 용도로,
+    현재 페이지에서 사용하지 않는 링크를 생성하지 않기 위해 전송합니다.
+    """
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "manager/dashboard.html"
 
@@ -29,6 +34,11 @@ class RegisterListView(APIView):
         return Response({"artists": serialized_artist_data}, status=status.HTTP_200_OK)
 
     def put(self, request, new_status):
+        """
+        작가 등록 신청자들의 status를 변경합니다.
+        new_status가 1이면 승인, 3이면 반려입니다.
+        현재 대기 중인 상태의 신청자만 수정합니다.
+        """
         artist_data = Artist.objects.select_related("status").filter(id__in=request.data.get("selectedArtists", None), status_id=2)
 
         try:
@@ -48,6 +58,11 @@ class StatisticsView(APIView):
     template_name = "manager/statistics.html"
 
     def get(self, request):
+        """
+        작가들의 통계를 보여줍니다.
+        100호 이하 작품 수를 nuber_of_lte_100이라는 키값으로 하고,
+        평균 가격을 avg_price라는 키값으로 하여 전송합니다.
+        """
         artist_data = Artist.objects.prefetch_related("work_set")
         for ad in artist_data:
             setattr(ad, "number_of_lte_100", ad.work_set.filter(size__lte=100).aggregate(number_of_lte_100=Count("size"))["number_of_lte_100"])
