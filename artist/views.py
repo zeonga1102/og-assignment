@@ -56,3 +56,14 @@ class DashboardView(APIView):
                          "exhibition_list": serialized_exhibition_data}
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+
+class RegisterWorkView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "artist/register_work.html"
+
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)
+
+    def post(self, request):
+        return Response(status=status.HTTP_200_OK)
