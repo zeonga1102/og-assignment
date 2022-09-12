@@ -6,3 +6,9 @@ a {
 a:hover {
     color: black;
 }
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
