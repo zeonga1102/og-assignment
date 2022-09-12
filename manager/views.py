@@ -29,7 +29,7 @@ class RegisterListView(APIView):
         return Response({"artists": serialized_artist_data}, status=status.HTTP_200_OK)
 
     def put(self, request, new_status):
-        artist_data = Artist.objects.filter(id__in=request.data.get("selectedArtists", None))
+        artist_data = Artist.objects.select_related("status").filter(id__in=request.data.get("selectedArtists", None), status_id=2)
 
         try:
             new_status_data = Status.objects.get(id=new_status)
