@@ -4,6 +4,7 @@ import re
 
 from .models import Artist
 from .models import Work
+from .models import Exhibition
 
 
 class ArtistSerializer(serializers.ModelSerializer):
@@ -31,3 +32,9 @@ class WorkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Work
         fields = ["artist", "title", "price", "size"]
+
+
+class ExhibitionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exhibition
+        fields = ["artist", "title", "start_date", "end_date", "work"]

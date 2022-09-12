@@ -4,7 +4,13 @@ from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework import status
 
+from .models import Artist
+from .models import Work
+from .models import Exhibition
+
 from .serializers import ArtistSerializer
+from .serializers import WorkSerializer
+from .serializers import ExhibitionSerializer
 
 class RegisterArtistView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -36,4 +42,17 @@ class DashboardView(APIView):
     template_name = "artist/dashboard.html"
 
     def get(self, request):
-        return Response(status=status.HTTP_200_OK)
+        artist = Artist.objects.get(user=request.user)
+        serialized_artist_data = ArtistSerializer(artist).data
+
+        work_data = Work.objects.filter(artist=artist)
+        serialized_work_data = WorkSerializer(work_data, many=True).data
+
+        exhibition_data = Exhibition.objects.filter(artist=artist)
+        serialized_exhibition_data = ExhibitionSerializer(exhibition_data, many=True).data
+
+        response_data = {"artist": serialized_artist_data,
+                         "works": serialized_work_data,
+                         "exhibition_list": serialized_exhibition_data}
+
+        return Response(response_data, status=status.HTTP_200_OK)
