@@ -29,6 +29,15 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 
 class WorkSerializer(serializers.ModelSerializer):
+
+    def validate(self, data):
+        size = int(data.get("size"))
+        if size < 1 or size > 500:
+            raise serializers.ValidationError(
+                   detail={"error": "1 ~ 500 사이의 값을 입력해주세요!"},
+               )
+        return data
+
     class Meta:
         model = Work
         fields = ["artist", "title", "price", "size"]
