@@ -53,7 +53,8 @@ class DashboardView(APIView):
 
         response_data = {"artist": serialized_artist_data,
                          "works": serialized_work_data,
-                         "exhibition_list": serialized_exhibition_data}
+                         "exhibition_list": serialized_exhibition_data,
+                         "is_dashboard": True}
 
         return Response(response_data, status=status.HTTP_200_OK)
 
