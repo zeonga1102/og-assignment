@@ -12,7 +12,7 @@ class Status(models.Model):
 
 
 class Artist(models.Model):
-    user = models.OneToOneField("user.User", on_delete=models.CASCADE)
+    user = models.ForeignKey("user.User", on_delete=models.CASCADE)
     name = models.CharField(max_length=16)
     gender = models.CharField(max_length=2)
     birthday = models.DateField()
@@ -27,6 +27,7 @@ class Work(models.Model):
     title = models.CharField(max_length=64)
     price = models.IntegerField()
     size = models.IntegerField()
+    register_date = models.DateTimeField(auto_now_add=True)
 
 
 class Exhibition(models.Model):
