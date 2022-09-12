@@ -1,27 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block statics %}
+    <link href={% static 'css/sign_inup.css' %} rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <div>
-        <form method="POST" action="{% url 'signup' %}">
-            {% csrf_token %}
-            <div class="row mb-3">
-                <label for="userId" class="col-sm-2 col-form-label">ID</label>
-                <div class="col-sm-10">
-                <input type="text" class="form-control" id="userId" name="username">
+    <div class="wrap">
+        <div class="container">
+            <form method="POST" action="{% url 'signup' %}" class="form-basic">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <label for="userId" class="col-sm-2 col-form-label">ID</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="userId" name="username">
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label for="password" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password">
+                <div class="row mb-3">
+                    <label for="password" class="col-sm-2 col-form-label">PW</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign up</button>
-        </form>
-        <a href={% url "login" %}>로그인</a>
-        <a href={% url "index" %}>메인으로</a>
+                <button type="submit" class="btn btn-primary">회원가입</button>
+            </form>
+            <p class="p-basic"><a href={% url "login" %} class="a-sign-inup">이미 회원이신가요? 로그인 하기!</a></p>
+            <p class="p-basic"><a href={% url "index" %}>Home</a></p>
+        </div>
     </div>
 {% endblock %}
