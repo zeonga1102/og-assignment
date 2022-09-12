@@ -1,0 +1,86 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.greeting {
+    margin: 0 10px 0 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.button-logout {
+    background-color: rgb(209, 21, 21);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+}
+
+.a-signinup {
+    background-color: rgb(50, 207, 255);
+    margin-right: 30px;
+    padding: 3px 6px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+}
+.a-signinup:hover {
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container > a {
+    margin: 30px;
+}
+
+.div-basic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.div-pink {
+    background-color: rgb(255, 153, 153);
+}
+.div-pink:hover {
+    background-color: rgb(255, 182, 193);
+}
+
+.div-green {
+    background-color: rgb(127, 255, 185);
+}
+.div-green:hover {
+    background-color: rgb(157, 255, 173);
+}
+
+.div-yellow {  
+    background-color: rgb(255, 225, 56);
+}
+.div-yellow:hover {
+    background-color: rgb(252, 241, 93);
+}
+
+.div-gray {
+    background-color: rgb(180, 180, 180);
+}
