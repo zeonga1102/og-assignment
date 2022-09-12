@@ -38,5 +38,13 @@ class RegisterListView(APIView):
         for ad in artist_data:
             ad.status = new_status_data
             ad.save()
-            
+
+        return Response(status=status.HTTP_200_OK)
+
+
+class StatisticsView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "manager/statistics.html"
+
+    def get(self, request):
         return Response(status=status.HTTP_200_OK)
