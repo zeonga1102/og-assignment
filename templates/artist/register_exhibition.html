@@ -6,18 +6,28 @@
 {% block artist_content %}
     <div>
         <h1>전시 등록</h1>
-        <form>
-            <p>제목 <input type="text"></p>
-            <p>시작일 <input type="text"></p>
-            <p>종료일 <input type="text"></p>
+        <form id="newExhibitionForm" class="row g-3">
+            {% csrf_token %}
+            <div class="col-12">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="64글자 이하">
+            </div>
+            <div class="col-md-6">
+                <label for="startDate" class="form-label">시작일</label>
+                <input type="text" class="form-control" id="startDate" name="start_date" placeholder="YYYY-MM-DD">
+            </div>
+            <div class="col-md-6">
+                <label for="endDate" class="form-label">종료일</label>
+                <input type="text" class="form-control" id="endDate" name="end_date" placeholder="YYYY-MM-DD">
+            </div>
             <div>
                 <table class="table table-striped">
                     <thead>
-                      <tr>
+                        <tr>
                         <th scope="col">제목</th>
                         <th scope="col">호수</th>
                         <th scope="col">선택</th>
-                      </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for work in works %}
@@ -29,6 +39,9 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" id="submitBtn">전시 등록</button>
             </div>
         </form>
     </div>
