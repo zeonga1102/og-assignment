@@ -40,7 +40,7 @@ class WorkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Work
-        fields = ["artist", "title", "price", "size"]
+        fields = ["id", "artist", "title", "price", "size"]
 
 
 class ExhibitionSerializer(serializers.ModelSerializer):
