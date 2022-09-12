@@ -34,6 +34,5 @@ function submitForm() {
 
 
 window.onload = function() {
-    const submitBtn = document.getElementById("submitBtn")
-    submitBtn.addEventListener("click", submitForm)
+    document.getElementById("submitBtn").addEventListener("click", submitForm)
 }

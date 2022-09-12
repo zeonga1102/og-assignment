@@ -50,9 +50,7 @@ function checkSize(e) {
 
 
 window.onload = function() {
-    const submitBtn = document.getElementById("submitBtn")
-    submitBtn.addEventListener("click", submitForm)
-
+    document.getElementById("submitBtn").addEventListener("click", submitForm)
     document.getElementById("price").addEventListener("keyup", (e) => { addComma(e) })
     document.getElementById("size").addEventListener("input", (e) => { checkSize(e) })
 }
