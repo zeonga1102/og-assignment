@@ -1,12 +1,14 @@
 {% extends "artist/base.html" %}
+{% load static %}
 
 {% block statics %}
+    <script src={% static "js/register_exhibition.js" %}></script>
 {% endblock %}
 
 {% block artist_content %}
     <div>
         <h1>전시 등록</h1>
-        <form id="newExhibitionForm" class="row g-3">
+        <form id="newExhibitionForm" class="row g-3" method="post" action={% url "artist:exhibition" %}>
             {% csrf_token %}
             <div class="col-12">
                 <label for="title" class="form-label">제목</label>
