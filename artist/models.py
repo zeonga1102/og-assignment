@@ -18,7 +18,7 @@ class Artist(models.Model):
     birthday = models.DateField()
     email = models.EmailField()
     phone = models.CharField(max_length=13)
-    signup_date = models.DateField(auto_now_add=True)
+    signup_date = models.DateTimeField(auto_now_add=True)
     status = models.ForeignKey(Status, on_delete=models.SET_NULL, null=True)
 
 
