@@ -80,7 +80,7 @@ class IndexView(APIView):
             if user.is_admin:
                 return Response({"user_type": "admin"}, status=status.HTTP_200_OK)
 
-            is_artist = Artist.objects.filter(user=user.id).first()
+            is_artist = Artist.objects.filter(user=user.id).last()
             if is_artist:
                 artist_status = is_artist.status.status
                 if artist_status == "승인":
