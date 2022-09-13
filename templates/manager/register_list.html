@@ -3,6 +3,7 @@
 
 {% block manager_statics %}
     <script src={% static "js/manager/register_list.js" %}></script>
+    <script src={% static "js/manager/search.js" %}></script>
 
     <link href={% static "css/manager/register_list.css" %} rel="stylesheet">
 {% endblock %}
@@ -10,12 +11,12 @@
 {% block manager_content %}
     <div class="wrap">
         <div class="console">
-            <form class="row g-3">
+            <form class="row g-3" id="searchForm" method="GET" action={% url "manager:register_list" %}>
                 <div class="col-auto">
-                  <input type="text" class="form-control" id="inputPassword2">
+                  <input type="text" class="form-control" id="inputSearch" name="keyword" placeholder="작가 이름">
                 </div>
                 <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3">검색</button>
+                  <button type="button" class="btn btn-primary mb-3" id="searchBtn">검색</button>
                 </div>
             </form>
             <button id="approvalBtn" value="1" class="button-basic">승인</button>

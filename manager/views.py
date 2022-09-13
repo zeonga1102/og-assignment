@@ -32,7 +32,15 @@ class RegisterListView(APIView):
     template_name = "manager/register_list.html"
 
     def get(self, request):
-        artist_data = Artist.objects.all().order_by("-signup_date")
+        """
+        작가 등록 신청자들의 목록을 보여줍니다.
+        만약 검색을 한 것이라면 검색 결과를 보여줍니다.
+        """
+        keyword = request.GET.get("keyword", None)
+        if keyword:
+            artist_data = Artist.objects.filter(name__icontains=keyword).order_by("-signup_date")
+        else:
+            artist_data = Artist.objects.all().order_by("-signup_date")
         serialized_artist_data = ArtistSerializer(artist_data, many=True).data
         return Response({"artists": serialized_artist_data}, status=status.HTTP_200_OK)
 
