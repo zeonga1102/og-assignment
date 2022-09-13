@@ -12,18 +12,24 @@
     window.location.href = "/login"
   </script>
   {% endif %}
+
+  <link href={% static "css/artist/base.css" %} rel="stylesheet">
+  <link href={% static "css/artist/register.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<div>
+<div class="top">
   <a href={% url "index" %}>메인으로</a>
+  <button onclick="logout()" class="button-logout">로그아웃</button>
+</div>
+<div class="container">
   <form id="newArtistForm" method="post" action={% url "artist:signup" %} class="row g-3">
       {% csrf_token %}
       <div class="col-md-4">
         <label for="name" class="form-label">이름</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="16글자 이하">
       </div>
-      <div class="col-md-2">
+      <div class="col-md-4">
         <label for="gender" class="form-label">성별</label>
         <select id="gender" class="form-select" name="gender">
           <option selected>여자</option>
@@ -43,7 +49,7 @@
         <input type="text" class="form-control" id="phone" name="phone" placeholder="010-1234-5678">
       </div>
         <div class="col-12">
-        <button type="button" class="btn btn-primary" id="submitBtn">Sign in</button>
+        <button type="button" class="btn btn-primary" id="submitBtn">신청하기</button>
       </div>
   </form>
 </div>
