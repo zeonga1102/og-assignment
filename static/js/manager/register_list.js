@@ -33,9 +33,3 @@ async function putArtistStatus(e) {
         window.location.reload()
     }
 }
-
-
-window.onload = function() {
-    document.getElementById("approvalBtn").addEventListener("click", (e) => { putArtistStatus(e) })
-    document.getElementById("rejectBtn").addEventListener("click", (e) => { putArtistStatus(e) })
-}
