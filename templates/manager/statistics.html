@@ -1,10 +1,12 @@
 {% extends "manager/base.html" %}
+{% load static %}
 
-{% block statics %}
+{% block manager_statics %}
+    <link href={% static "css/manager/statistics.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block manager_content %}
-    <div>
+    <div class="wrap">
         <div>
             <table class="table table-striped">
                 <thead>
