@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block statics %}
-    <link href={% static 'css/sign_inup.css' %} rel="stylesheet">
+    <link href={% static "css/sign_inup.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block content %}
     <div class="wrap">
         <div class="container">
-            <form method="POST" action="{% url 'signup' %}" class="form-basic">
+            <form method="POST" action={% url "signup" %} class="form-basic">
                 {% csrf_token %}
                 <div class="row mb-3">
                     <label for="userId" class="col-sm-2 col-form-label">ID</label>
