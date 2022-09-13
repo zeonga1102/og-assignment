@@ -104,19 +104,43 @@ class InfoView(APIView):
         만약 검색을 한 것이라면 검색 결과를 보여줍니다.
         """
         keyword = request.GET.get("keyword", None)
+        filter = request.GET.get("filter")
+        
         if type == "artist":
             if keyword:
-                artist_data = Artist.objects.filter(status__status="승인", name__icontains=keyword).order_by("-signup_date")
+                if filter == "이름":
+                    artist_data = Artist.objects.filter(status__status="승인", name__icontains=keyword).order_by("-signup_date")
+                elif filter == "이메일":
+                    artist_data = Artist.objects.filter(status__status="승인", email__icontains=keyword).order_by("-signup_date")
+                else:
+                    artist_data = Artist.objects.filter(status__status="승인", phone__icontains=keyword).order_by("-signup_date")
             else:
                 artist_data = Artist.objects.filter(status__status="승인").order_by("-signup_date")
+            
             serialized_artist_data = ArtistSerializer(artist_data, many=True).data
+            
             return Response({"type": "artist", "artists": serialized_artist_data}, status=status.HTTP_200_OK)
+        
         elif type == "work":
             if keyword:
-                work_data = Work.objects.filter(title__icontains=keyword).order_by("-register_date")
+                if filter == "제목":
+                    work_data = Work.objects.filter(title__icontains=keyword).order_by("-register_date")
+                else:
+                    new_keyword = ""
+                    for i in keyword:
+                        try:
+                            new_keyword += str(int(i))
+                        except ValueError:
+                            continue
+                    if new_keyword == "":
+                        return redirect("info", "work")
+                    work_data = Work.objects.filter(size=new_keyword).order_by("-register_date")
             else:
                 work_data = Work.objects.all().order_by("-register_date")
+
             serialized_work_data = WorkSerializer(work_data, many=True).data
+
             return Response({"type": "work", "works": serialized_work_data}, status=status.HTTP_200_OK)
+        
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

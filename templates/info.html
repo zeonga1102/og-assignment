@@ -12,10 +12,22 @@
     <div class="top">
         <form class="row g-3" id="searchForm" method="GET" action={% url "info" type %}>
             <div class="col-auto">
+                <select id="filter" class="form-select" name="filter">
+                    {% if type == "artist" %}
+                        <option selected>이름</option>
+                        <option>이메일</option>
+                        <option>연락처</option>
+                    {% else %}
+                        <option selected>제목</option>
+                        <option>호수</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="col-auto">
                 {% if type == "artist" %}
-                    <input type="text" class="form-control" id="inputSearch" name="keyword" placeholder="작가 이름">
+                    <input type="text" class="form-control" id="inputSearch" name="keyword" placeholder="작가 검색">
                 {% else %}
-                    <input type="text" class="form-control" id="inputSearch" name="keyword" placeholder="제목">
+                    <input type="text" class="form-control" id="inputSearch" name="keyword" placeholder="작품 검색">
                 {% endif %}
             </div>
             <div class="col-auto">
