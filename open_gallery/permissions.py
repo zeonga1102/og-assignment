@@ -23,7 +23,7 @@ class IsNotSignedupUser(BasePermission):
         if not user.is_authenticated:
             response ={
                     "detail": "서비스를 이용하기 위해 로그인 해주세요.",
-                }
+            }
             raise GenericAPIException(status_code=status.HTTP_401_UNAUTHORIZED, detail=response)
 
         if user.is_admin:
@@ -51,7 +51,7 @@ class IsArtist(BasePermission):
         if not user.is_authenticated:
             response ={
                     "detail": "서비스를 이용하기 위해 로그인 해주세요.",
-                }
+            }
             raise GenericAPIException(status_code=status.HTTP_401_UNAUTHORIZED, detail=response)
         
         if user.is_admin:
