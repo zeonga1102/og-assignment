@@ -12,14 +12,6 @@
     font-weight: 700;
 }
 
-.button-logout {
-    background-color: rgb(209, 21, 21);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-weight: 700;
-}
-
 .a-signinup {
     background-color: rgb(50, 207, 255);
     margin-right: 30px;
