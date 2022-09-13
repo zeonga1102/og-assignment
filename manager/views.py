@@ -37,6 +37,9 @@ class RegisterListView(APIView):
         만약 검색을 한 것이라면 검색 결과를 보여줍니다.
         """
         keyword = request.GET.get("keyword", None)
+        if len(keyword) > 30:
+            keyword = keyword[:30]
+            
         filter = request.GET.get("filter")
         if keyword:
             if filter == "이름":
