@@ -103,11 +103,11 @@ class InfoView(APIView):
         작가 정보는 승인된 작가만 보여집니다.
         """
         if type == "artist":
-            artist_data = Artist.objects.filter(status__status="승인")
+            artist_data = Artist.objects.filter(status__status="승인").order_by("-signup_date")
             serialized_artist_data = ArtistSerializer(artist_data, many=True).data
             return Response({"type": "artist", "artists": serialized_artist_data}, status=status.HTTP_200_OK)
         elif type == "work":
-            work_data = Work.objects.all()
+            work_data = Work.objects.all().order_by("-register_date")
             serialized_work_data = WorkSerializer(work_data, many=True).data
             return Response({"type": "work", "works": serialized_work_data}, status=status.HTTP_200_OK)
         else:
