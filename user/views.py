@@ -101,6 +101,7 @@ class InfoView(APIView):
         """
         작가 혹은 작품 정보를 보여줍니다.
         작가 정보는 승인된 작가만 보여집니다.
+        만약 검색을 한 것이라면 검색 결과를 보여줍니다.
         """
         keyword = request.GET.get("keyword", None)
         if type == "artist":
