@@ -3,7 +3,7 @@
 
 {% block manager_statics %}
     <script src={% static "js/manager/register_list.js" %}></script>
-    <script src={% static "js/manager/search.js" %}></script>
+    <script src={% static "js/search.js" %}></script>
 
     <link href={% static "css/manager/register_list.css" %} rel="stylesheet">
 {% endblock %}
@@ -13,7 +13,14 @@
         <div class="console">
             <form class="row g-3" id="searchForm" method="GET" action={% url "manager:register_list" %}>
                 <div class="col-auto">
-                  <input type="text" class="form-control" id="inputSearch" name="keyword" placeholder="작가 이름">
+                    <select id="filter" class="form-select" name="filter">
+                        <option selected>이름</option>
+                        <option>이메일</option>
+                        <option>연락처</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                  <input type="text" class="form-control" id="inputSearch" name="keyword">
                 </div>
                 <div class="col-auto">
                   <button type="button" class="btn btn-primary mb-3" id="searchBtn">검색</button>
