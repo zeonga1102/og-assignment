@@ -1,15 +1,16 @@
 {% extends "artist/base.html" %}
 {% load static %}
 
-{% block statics %}
+{% block artist_statics %}
     <script src={% static "js/artist/register_work.js" %}></script>
     <script src={% static "js/re.js" %}></script>
     <script src={% static "js/check_date.js" %}></script>
+
+    <link href={% static "css/artist/register_work.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block artist_content %}
-    <div>
-        <h1>작품 등록</h1>
+    <div class="container">
         <form id="newWorkForm" method="post" action={% url "artist:work" %}>
             {% csrf_token %}
             <div class="row mb-3">
@@ -21,7 +22,7 @@
             <div class="row mb-3">
                 <label for="price" class="col-sm-2 col-form-label">가격</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="price" name="price">
+                    <input type="text" class="form-control" id="price" name="price" placeholder="0 이상">
                 </div>
             </div>
             <div class="row mb-3">
