@@ -1,5 +1,5 @@
-const nameRe = /^\S{1}.{1,15}$/
-const titleRe = /^\S{1}.{1,64}$/
+const nameRe = /^\S{1}.{0,15}$/
+const titleRe = /^\S{1}.{0,63}$/
 const dateRe = /^[1|2]\d{3}-\d{2}-\d{2}$/
 const emailRe = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
 const phoneRe = /^010-\d{4}-\d{4}$/
