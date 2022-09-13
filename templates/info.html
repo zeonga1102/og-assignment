@@ -1,48 +1,59 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block statics %}
+    <link href={% static 'css/info.css' %} rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<div>
-    <input type="text">
-    <div>
-        <a href={% url "info" "artist" %}>작가 조회</a>
-        <a href={% url "info" "work" %}>작품 조회</a>
-        <a href={% url "index" %}>메인으로</a>
-        {% if user.is_authenticated %}
-            <button onclick="logout()">로그아웃</button>
-        {% else %}
-            <a href={% url "login" %}>로그인</a>
-            <a href={% url "signup" %}>회원가입</a>
-        {% endif %}
+<div class="wrap">
+    <div class="top">
+        <form class="row g-3">
+            <div class="col-auto">
+              <input type="text" class="form-control" id="inputPassword2">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-3">검색</button>
+            </div>
+        </form>
+        <div class="menu">
+            <a href={% url "info" "artist" %}>작가 조회</a>
+            <a href={% url "info" "work" %}>작품 조회</a>
+            <a href={% url "index" %}>메인으로</a>
+            {% if user.is_authenticated %}
+                <button onclick="logout()" class="button-logout">로그아웃</button>
+            {% else %}
+                <a href={% url "login" %}>로그인</a>
+                <a href={% url "signup" %}>회원가입</a>
+            {% endif %}
+        </div>
     </div>
-</div>
-<div>
-    {% if type == "artist" %}
-        {% for artist in artists %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ artist.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ artist.gender }}, {{ artist.birthday }}</h6>
-                    <a href="mailto:{{ artist.email }}" class="card-link">{{ artist.email }}</a>
-                    <a href="tel:{{ artist.phone }}" class="card-link">{{ artist.phone }}</a>
+    <div class="container">
+        {% if type == "artist" %}
+            {% for artist in artists %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ artist.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ artist.gender }}, {{ artist.birthday }}</h6>
+                        <a href="mailto:{{ artist.email }}" class="card-link">{{ artist.email }}</a>
+                        <a href="tel:{{ artist.phone }}" class="card-link">{{ artist.phone }}</a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
 
-    {% elif type == "work" %}
-          {% for work in works %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ work.title }}</h5>
+        {% elif type == "work" %}
+            {% for work in works %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ work.title }}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ work.size }}호</li>
+                        <li class="list-group-item">{{ work.price }}원</li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ work.size }}호</li>
-                    <li class="list-group-item">{{ work.price }}원</li>
-                </ul>
-            </div>
-          {% endfor %}
-    {% endif%}
+            {% endfor %}
+        {% endif%}
+    </div>
 </div>
 {% endblock %}
