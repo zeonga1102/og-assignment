@@ -1,17 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block statics %}
+    <link href={% static "css/artist/base.css" %} rel="stylesheet">
+    {% block artist_statics %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
-    <div>
+    <div class="top">
         <a href={% url "artist:work" %}>작품 등록</a>
         <a href={% url "artist:exhibition" %}>전시 등록</a>
         {% if not is_dashboard %}
             <a href={% url "artist:dashboard" %}>대시보드로</a>
         {% endif %}
         <a href={% url "index" %}>메인으로</a>
-        <button onclick="logout()">로그아웃</button>
+        <button onclick="logout()" class="button-logout">로그아웃</button>
     </div>
     {% block artist_content %}
     {% endblock %}
