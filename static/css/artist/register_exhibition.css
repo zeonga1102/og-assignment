@@ -1,0 +1,13 @@
+.container {
+    margin: 30px auto 0 auto;
+    padding: 100px 50px;
+}
+
+.btn {
+    display: block;
+    margin: 0 auto;
+}
+
+table {
+    text-align: center;
+}

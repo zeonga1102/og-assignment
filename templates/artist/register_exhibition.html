@@ -1,15 +1,16 @@
 {% extends "artist/base.html" %}
 {% load static %}
 
-{% block statics %}
+{% block artist_statics %}
     <script src={% static "js/artist/register_exhibition.js" %}></script>
     <script src={% static "js/re.js" %}></script>
     <script src={% static "js/check_date.js" %}></script>
+
+    <link href={% static "css/artist/register_exhibition.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block artist_content %}
-    <div>
-        <h1>전시 등록</h1>
+    <div class="container">
         <form id="newExhibitionForm" class="row g-3" method="post" action={% url "artist:exhibition" %}>
             {% csrf_token %}
             <div class="col-12">
@@ -36,7 +37,7 @@
                     <tbody>
                         {% for work in works %}
                             <tr>
-                                <td>{{ work.title }}</td>
+                                <td>{{ work.title|truncatechars:10 }}</td>
                                 <td>{{ work.size }}</td>
                                 <td><input type="checkbox" name="work" value={{ work.id }}></td>
                             </tr>
