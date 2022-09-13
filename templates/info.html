@@ -8,9 +8,13 @@
 {% block content %}
 <div class="wrap">
     <div class="top">
-        <form class="row g-3">
+        <form class="row g-3" method="GET" action={% url "info" type %}>
             <div class="col-auto">
-              <input type="text" class="form-control" id="inputPassword2">
+                {% if type == "artist" %}
+                    <input type="text" class="form-control" id="input_search" name="keyword" placeholder="작가 이름">
+                {% else %}
+                    <input type="text" class="form-control" id="input_search" name="keyword" placeholder="제목">
+                {% endif %}
             </div>
             <div class="col-auto">
               <button type="submit" class="btn btn-primary mb-3">검색</button>
