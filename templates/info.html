@@ -48,7 +48,7 @@
     </div>
     <div class="container">
         {% if type == "artist" %}
-            {% for artist in artists %}
+            {% for artist in items %}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ artist.name }}</h5>
@@ -60,7 +60,7 @@
             {% endfor %}
 
         {% elif type == "work" %}
-            {% for work in works %}
+            {% for work in items %}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ work.title }}</h5>
@@ -72,6 +72,15 @@
                 </div>
             {% endfor %}
         {% endif%}
+    </div>
+    <div class="div-paginator">
+        {% if items.has_previous %}
+            <a href="?page={{ items.number|add:-1 }}">&lt;prev</a>
+        {% endif %}
+            <strong style="color: #f28cf2">{{ items.number }}</strong>
+        {% if items.has_next %}
+            <a href="?page={{ items.number|add:+1 }}">next&gt;</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

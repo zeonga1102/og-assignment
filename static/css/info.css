@@ -27,3 +27,11 @@
 .card {
     margin-top: 20px;
 }
+
+.div-paginator {
+    margin: 20px auto 0 auto;
+}
+
+.div-paginator > a {
+    margin: 0 3px;
+}

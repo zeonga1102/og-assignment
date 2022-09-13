@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
-from rest_framework.renderers import TemplateHTMLRenderer
 from django.contrib.auth import login, logout, authenticate
+from django.core.paginator import Paginator
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,6 +12,9 @@ from artist.models import Work
 from .serializers import UserSerializer
 from artist.serializers import ArtistSerializer
 from artist.serializers import WorkSerializer
+
+
+NUMBER_OF_ITEMS_PER_PAGE = 100
 
 
 class UserView(APIView):
@@ -105,6 +109,8 @@ class InfoView(APIView):
         """
         keyword = request.GET.get("keyword", None)
         filter = request.GET.get("filter")
+
+        page = request.GET.get('page', 1)
         
         if type == "artist":
             if keyword:
@@ -121,8 +127,16 @@ class InfoView(APIView):
                 artist_data = Artist.objects.filter(status__status="승인").order_by("-signup_date")
             
             serialized_artist_data = ArtistSerializer(artist_data, many=True).data
+
+            if (artist_data.count() - 1) // NUMBER_OF_ITEMS_PER_PAGE + 1 < int(page):
+                page = (artist_data.count() - 1) // NUMBER_OF_ITEMS_PER_PAGE + 1
+            elif int(page) < 1:
+                page = 1
+
+            paginator = Paginator(serialized_artist_data, NUMBER_OF_ITEMS_PER_PAGE)
+            items = paginator.page(page)
             
-            return Response({"type": "artist", "artists": serialized_artist_data}, status=status.HTTP_200_OK)
+            return Response({"type": "artist", "items": items}, status=status.HTTP_200_OK)
         
         elif type == "work":
             if keyword:
@@ -143,7 +157,15 @@ class InfoView(APIView):
 
             serialized_work_data = WorkSerializer(work_data, many=True).data
 
-            return Response({"type": "work", "works": serialized_work_data}, status=status.HTTP_200_OK)
+            if (work_data.count() - 1) // NUMBER_OF_ITEMS_PER_PAGE + 1 < int(page):
+                page = (work_data.count() - 1) // NUMBER_OF_ITEMS_PER_PAGE + 1
+            elif int(page) < 1:
+                page = 1
+
+            paginator = Paginator(serialized_work_data, NUMBER_OF_ITEMS_PER_PAGE)
+            items = paginator.page(page)
+
+            return Response({"type": "work", "items": items}, status=status.HTTP_200_OK)
         
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
