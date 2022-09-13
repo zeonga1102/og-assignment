@@ -1,17 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block statics %}
+    <link href={% static "css/manager/base.css" %} rel="stylesheet">
+
+    {% block manager_statics %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
-    <div>
+    <div class="top">
         {% if not is_dashboard %}
             <a href={% url "manager:register_list" %}>작가 등록 신청 내역</a>
             <a href={% url "manager:statistics" %}>작가 통계</a>
             <a href={% url "manager:dashboard" %}>대시보드로</a>
         {% endif %}
         <a href={% url "index" %}>메인으로</a>
-        <button onclick="logout()">로그아웃</button>
+        <button onclick="logout()" class="button-logout">로그아웃</button>
     </div>
     {% block manager_content %}
     {% endblock %}

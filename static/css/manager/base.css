@@ -1,0 +1,12 @@
+.top {
+    background-color: rgb(255, 182, 193);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+.top > a {
+    margin-right: 20px;
+}
