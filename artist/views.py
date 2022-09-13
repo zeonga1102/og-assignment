@@ -12,11 +12,11 @@ from .serializers import ArtistSerializer
 from .serializers import WorkSerializer
 from .serializers import ExhibitionSerializer
 
-from open_gallery.permissions import IsNotSignedupUser
+from open_gallery.permissions import IsNotSignedupUserOrAnonymous
 from open_gallery.permissions import IsArtist
 
 class RegisterArtistView(APIView):
-    permission_classes = [IsNotSignedupUser]
+    permission_classes = [IsNotSignedupUserOrAnonymous]
 
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "artist/register_artist.html"
@@ -100,7 +100,7 @@ class RegisterWorkView(APIView):
 
 class RegisterExhibitionView(APIView):
     permission_classes = [IsArtist]
-    
+
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "artist/register_exhibition.html"
 

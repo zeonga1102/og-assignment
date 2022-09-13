@@ -11,20 +11,19 @@ class GenericAPIException(APIException):
         super().__init__(detail=detail, code=code)
 
 
-class IsNotSignedupUser(BasePermission):
+class IsNotSignedupUserOrAnonymous(BasePermission):
     """
     한번도 작가 신청을 하지 않은 사용자와 신청을 했으나 반려당한 사용자만 접근 허용합니다.
+    또한 로그인 하지 않은 유저의 접근도 허용합니다.
+    로그인 하지 않은 유저는 프론트에서 로그인 페이지로 이동시켜줍니다.
     """
     message = "접근 권한이 없습니다."
 
     def has_permission(self, request, view):
         user = request.user
 
-        if not user.is_authenticated:
-            response ={
-                    "detail": "서비스를 이용하기 위해 로그인 해주세요.",
-            }
-            raise GenericAPIException(status_code=status.HTTP_401_UNAUTHORIZED, detail=response)
+        if user.is_anonymous:
+            return True
 
         if user.is_admin:
             return False
