@@ -12,6 +12,9 @@ class GenericAPIException(APIException):
 
 
 class IsNotSignedupUser(BasePermission):
+    """
+    한번도 작가 신청을 하지 않은 사용자와 신청을 했으나 반려당한 사용자만 접근 허용합니다.
+    """
     message = "접근 권한이 없습니다."
 
     def has_permission(self, request, view):
@@ -37,6 +40,9 @@ class IsNotSignedupUser(BasePermission):
 
 
 class IsArtist(BasePermission):
+    """
+    승인된 작가만 접근 가능합니다.
+    """
     message = "접근 권한이 없습니다."
 
     def has_permission(self, request, view):
