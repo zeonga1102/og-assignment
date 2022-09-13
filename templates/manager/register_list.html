@@ -1,16 +1,25 @@
 {% extends "manager/base.html" %}
 {% load static %}
 
-{% block statics %}
+{% block manager_statics %}
     <script src={% static "js/manager/register_list.js" %}></script>
+
+    <link href={% static "css/manager/register_list.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block manager_content %}
-    <div>
-        <div>
-            <input type="text">
-            <button id="approvalBtn" value="1">승인</button>
-            <button id="rejectBtn" value="3">반려</button>
+    <div class="wrap">
+        <div class="console">
+            <form class="row g-3">
+                <div class="col-auto">
+                  <input type="text" class="form-control" id="inputPassword2">
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-3">검색</button>
+                </div>
+            </form>
+            <button id="approvalBtn" value="1" class="button-basic">승인</button>
+            <button id="rejectBtn" value="3" class="button-basic">반려</button>
         </div>
         <div>
             <table class="table table-striped">

@@ -1,0 +1,29 @@
+.console {
+    display: flex;
+    align-items: center;
+}
+
+.g-3 {
+    margin-top: 0;
+    flex-grow: 1;
+}
+
+.button-basic {
+    margin-left: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+#approvalBtn {
+    background-color: rgb(88, 226, 146);
+    
+}
+
+#rejectBtn {
+    background-color: rgb(211, 42, 42);
+}
+
+table {
+    text-align: center;
+}
