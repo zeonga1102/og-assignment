@@ -44,3 +44,7 @@ python manage.py runserver
 
 ### ERD
 ![og-assignment](https://user-images.githubusercontent.com/71905164/189887098-39f8b010-dbee-43bb-9047-713a0c20201c.png)
+
+### API
+![image](https://user-images.githubusercontent.com/71905164/189905148-94f429d6-7e26-4c48-a116-ffc4e9b92b6d.png)
+[구글 시트로 이동](https://docs.google.com/spreadsheets/d/1_cHQAHgdjYI2THQgDlA6QmeCYfuyCEmbXU8bb-GLTfs/edit?usp=sharing)
