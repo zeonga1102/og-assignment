@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.db.models import Avg, Count
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,17 +11,17 @@ from artist.serializers import ArtistSerializer
 
 
 class DashboardView(APIView):
-    """
-    관리자 페이지의 대시보드를 보여줍니다.
-    is_dashboard는 현재 보고있는 페이지가 대시보드라고 나타내는 플래그 용도로,
-    현재 페이지에서 사용하지 않는 링크를 생성하지 않기 위해 전송합니다.
-    """
     permission_classes = [permissions.IsAdminUser]
 
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "manager/dashboard.html"
 
     def get(self, request):
+        """
+        관리자 페이지의 대시보드를 보여줍니다.
+        is_dashboard는 현재 보고있는 페이지가 대시보드라고 나타내는 플래그 용도로,
+        현재 페이지에서 사용하지 않는 링크를 생성하지 않기 위해 전송합니다.
+        """
         return Response({"is_dashboard": True}, status=status.HTTP_200_OK)
 
 
@@ -59,7 +58,7 @@ class RegisterListView(APIView):
 
 class StatisticsView(APIView):
     permission_classes = [permissions.IsAdminUser]
-    
+
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "manager/statistics.html"
 
