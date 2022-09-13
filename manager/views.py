@@ -3,7 +3,7 @@ from django.db.models import Avg, Count
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework import status
+from rest_framework import status, permissions
 
 from artist.models import Artist
 from artist.models import Status
@@ -17,6 +17,8 @@ class DashboardView(APIView):
     is_dashboard는 현재 보고있는 페이지가 대시보드라고 나타내는 플래그 용도로,
     현재 페이지에서 사용하지 않는 링크를 생성하지 않기 위해 전송합니다.
     """
+    permission_classes = [permissions.IsAdminUser]
+
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "manager/dashboard.html"
 
@@ -25,6 +27,8 @@ class DashboardView(APIView):
 
 
 class RegisterListView(APIView):
+    permission_classes = [permissions.IsAdminUser]
+
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "manager/register_list.html"
 
@@ -54,6 +58,8 @@ class RegisterListView(APIView):
 
 
 class StatisticsView(APIView):
+    permission_classes = [permissions.IsAdminUser]
+    
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "manager/statistics.html"
 
