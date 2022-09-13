@@ -48,7 +48,7 @@ class DashboardView(APIView):
         is_dashboard는 현재 보고있는 페이지가 대시보드라고 나타내는 플래그 용도로,
         현재 페이지에서 대시보드로 이동하는 링크를 생성하지 않기 위해 전송합니다.
         """
-        artist = Artist.objects.get(user=request.user)
+        artist = Artist.objects.filter(user=request.user, status_id=1).last()
         serialized_artist_data = ArtistSerializer(artist).data
 
         work_data = Work.objects.filter(artist=artist)
