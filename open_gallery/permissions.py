@@ -11,19 +11,22 @@ class GenericAPIException(APIException):
         super().__init__(detail=detail, code=code)
 
 
-class IsNotSignedupUserOrAnonymous(BasePermission):
+class IsNotSignedupUserOrAnonymousAndMethodGet(BasePermission):
     """
     한번도 작가 신청을 하지 않은 사용자와 신청을 했으나 반려당한 사용자만 접근 허용합니다.
-    또한 로그인 하지 않은 유저의 접근도 허용합니다.
-    로그인 하지 않은 유저는 프론트에서 로그인 페이지로 이동시켜줍니다.
+    또한 로그인 하지 않은 유저의 접근도 GET method에 한해서 허용합니다.
+    로그인 하지 않은 유저는 해당 페이지에 접근할 때 로그인 페이지로 이동시켜줍니다.
     """
     message = "접근 권한이 없습니다."
 
     def has_permission(self, request, view):
         user = request.user
 
-        if user.is_anonymous:
+        if user.is_anonymous and request.method =="GET":
             return True
+
+        if user.is_anonymous:
+            return False
 
         if user.is_admin:
             return False
