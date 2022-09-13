@@ -14,6 +14,7 @@
                     <th scope="col">이름</th>
                     <th scope="col">100호 이하 작품 수</th>
                     <th scope="col">평균 가격</th>
+                    <th scope="col">전시 횟수</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@
                             <td>{{ artist.name }}</td>
                             <td>{{ artist.number_of_lte_100 }}</td>
                             <td>{{ artist.avg_price }}</td>
+                            <td>{{ artist.number_of_exhibition }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

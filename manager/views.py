@@ -76,11 +76,12 @@ class StatisticsView(APIView):
         100호 이하 작품 수를 nuber_of_lte_100이라는 키값으로 하고,
         평균 가격을 avg_price라는 키값으로 하여 전송합니다.
         """
-        artist_data = Artist.objects.prefetch_related("work_set").filter(status_id=1)
+        artist_data = Artist.objects.prefetch_related("work_set").prefetch_related("exhibition_set").filter(status_id=1)
         for ad in artist_data:
-            setattr(ad, "number_of_lte_100", ad.work_set.filter(size__lte=100).aggregate(number_of_lte_100=Count("size"))["number_of_lte_100"])
+            setattr(ad, "number_of_lte_100", ad.work_set.filter(size__lte=100).count())
             avg_price = ad.work_set.all().aggregate(avg_price=Avg("price"))["avg_price"]
             if avg_price is None:
                 avg_price = 0
             setattr(ad, "avg_price", avg_price)
+            setattr(ad, "number_of_exhibition", ad.exhibition_set.all().count())
         return Response({"artists": artist_data}, status=status.HTTP_200_OK)
