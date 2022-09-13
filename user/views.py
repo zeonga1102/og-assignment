@@ -19,7 +19,7 @@ NUMBER_OF_ITEMS_PER_PAGE = 100
 
 class UserView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = "sign_up.html"
+    template_name = "user/sign_up.html"
 
     def get(self, request):
         return Response(status=status.HTTP_200_OK)
@@ -40,7 +40,7 @@ class UserView(APIView):
 
 class UserApiView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = "sign_in.html"
+    template_name = "user/sign_in.html"
 
     def get(self, request):
         return Response(status=status.HTTP_200_OK)
@@ -99,7 +99,7 @@ class IndexView(APIView):
 
 class InfoView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = "info.html"
+    template_name = "user/info.html"
 
     def get(self, request, type):
         """
