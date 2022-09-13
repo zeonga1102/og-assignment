@@ -20,7 +20,7 @@
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 19rem);
+    grid-template-columns: repeat(auto-fill, 19rem);
     justify-content: center;
 }
 
