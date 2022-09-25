@@ -3,6 +3,7 @@
 
 {% block statics %}
     <script src={% static "js/search.js" %}></script>
+    <script src={% static "js/user/info.js" %}></script>
 
     <link href={% static "css/user/info.css" %} rel="stylesheet">
 {% endblock %}
@@ -75,11 +76,11 @@
     </div>
     <div class="div-paginator">
         {% if items.has_previous %}
-            <a href="?page={{ items.number|add:-1 }}">&lt;prev</a>
+            <a id="prev" href="?page={{ items.number|add:-1 }}">&lt;prev</a>
         {% endif %}
             <strong style="color: #f28cf2">{{ items.number }}</strong>
         {% if items.has_next %}
-            <a href="?page={{ items.number|add:+1 }}">next&gt;</a>
+            <a id="next" href="?page={{ items.number|add:+1 }}">next&gt;</a>
         {% endif %}
     </div>
 </div>
