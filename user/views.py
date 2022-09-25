@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -134,7 +134,10 @@ class InfoView(APIView):
                 page = 1
 
             paginator = Paginator(serialized_artist_data, NUMBER_OF_ITEMS_PER_PAGE)
-            items = paginator.page(page)
+            try:
+                items = paginator.page(page)
+            except EmptyPage:
+                return Response({"type": "artist"}, status=status.HTTP_200_OK)
             
             return Response({"type": "artist", "items": items}, status=status.HTTP_200_OK)
         
@@ -163,7 +166,10 @@ class InfoView(APIView):
                 page = 1
 
             paginator = Paginator(serialized_work_data, NUMBER_OF_ITEMS_PER_PAGE)
-            items = paginator.page(page)
+            try:
+                items = paginator.page(page)
+            except EmptyPage:
+                return Response({"type": "work"}, status=status.HTTP_200_OK)
 
             return Response({"type": "work", "items": items}, status=status.HTTP_200_OK)
         
