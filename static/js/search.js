@@ -12,13 +12,8 @@ function checkInputSearch() {
 }
 
 
-function submitForm() {
+function submitSearchForm() {
     if(checkInputSearch()) {
         document.getElementById("searchForm").submit()
     }
-}
-
-
-window.onload = function() {
-    document.getElementById("searchBtn").addEventListener("click", submitForm)
 }

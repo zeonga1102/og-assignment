@@ -1,4 +1,6 @@
 window.onload = function() {
+    document.getElementById("searchBtn").addEventListener("click", submitSearchForm)
+
     const prev = document.getElementById("prev")
     const next = document.getElementById("next")
 
