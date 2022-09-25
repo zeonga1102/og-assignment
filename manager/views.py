@@ -59,7 +59,7 @@ class RegisterListView(APIView):
         new_status가 1이면 승인, 3이면 반려입니다.
         현재 대기 중인 상태의 신청자만 수정합니다.
         """
-        artist_data = Artist.objects.select_related("status").filter(id__in=request.data.get("selectedArtists", None), status_id=2)
+        artist_data = Artist.objects.filter(id__in=request.data.get("selectedArtists", None), status_id=2)
 
         try:
             new_status_data = Status.objects.get(id=new_status)
